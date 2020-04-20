@@ -1,11 +1,11 @@
 package com.dancc.basketballstatskeeper.model;
 
 public class Operation {
-  public int playerId;
+  public Player player;
   public Action action;
 
-  public Operation(int playerId, Action action) {
-    this.playerId = playerId;
+  public Operation(Player player, Action action) {
+    this.player = player;
     this.action = action;
   }
 }

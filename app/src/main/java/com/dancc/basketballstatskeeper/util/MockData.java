@@ -9,12 +9,12 @@ public class MockData {
   public static ArrayList<Operation> getMockOperations() {
     return new ArrayList<Operation>() {
       {
-        add(new Operation(4, Action.ASSIST));
-        add(new Operation(9, Action.POINT1));
-        add(new Operation(15, Action.POINT3));
-        add(new Operation(12, Action.POINT2));
-        add(new Operation(3, Action.ASSIST));
-        add(new Operation(1, Action.ASSIST));
+        add(new Operation(new Player(4, "aaa"), Action.ASSIST));
+        add(new Operation(new Player(9, "aaa"), Action.POINT1));
+        add(new Operation(new Player(15, "aaa"), Action.POINT3));
+        add(new Operation(new Player(12, "aaa"), Action.POINT2));
+        add(new Operation(new Player(3, "aaa"), Action.ASSIST));
+        add(new Operation(new Player(4, "aaa"), Action.ASSIST));
       }
     };
   }

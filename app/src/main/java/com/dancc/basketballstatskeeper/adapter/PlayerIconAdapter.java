@@ -37,14 +37,11 @@ public class PlayerIconAdapter
         .inflate(R.layout.player_icon_cell_view, parent, false);
 
     final PlayerIconViewHolder viewHolder = new PlayerIconViewHolder(v);
-    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        callback.onPlayerClicked(players.get(viewHolder.getAdapterPosition()));
-        notifyItemChanged(selectedPosition);
-        selectedPosition = viewHolder.getAdapterPosition();
-        notifyItemChanged(selectedPosition);
-      }
+    viewHolder.itemView.setOnClickListener(view -> {
+      callback.onPlayerClicked(players.get(viewHolder.getAdapterPosition()));
+      notifyItemChanged(selectedPosition);
+      selectedPosition = viewHolder.getAdapterPosition();
+      notifyItemChanged(selectedPosition);
     });
 
     return viewHolder;

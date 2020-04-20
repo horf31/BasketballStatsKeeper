@@ -54,7 +54,7 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
     }
 
     void bind(Operation operation) {
-      playerTextView.setText(Integer.toString(operation.playerId));
+      playerTextView.setText(Integer.toString(operation.player.number));
       String displayText = getDisplayText(operation.action);
       operationTextView.setText(displayText);
     }
