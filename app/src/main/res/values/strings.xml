@@ -9,4 +9,17 @@
   <!--  Record Page -->
   <string name="undo">Undo</string>
   <string name="end_game">End game</string>
+
+  <!--  Record Panel -->
+  <string name="plus_one_point">+1 PTS</string>
+  <string name="plus_two_points">+2 PTS</string>
+  <string name="plus_three_points">+3 PTS</string>
+  <string name="miss_one_point">+1 PT MISS</string>
+  <string name="miss_two_points">+2 PT MISS</string>
+  <string name="miss_three_points">+3 PT MISS</string>
+  <string name="plus_rebound">+1 REB</string>
+  <string name="plus_assist">+1 AST</string>
+  <string name="plus_block">+1 BLK</string>
+  <string name="plus_steal">+1 STL</string>
+  <string name="plus_turnover">+1 TO</string>
 </resources>

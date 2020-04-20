@@ -45,17 +45,22 @@
       app:layout_constraintEnd_toEndOf="@id/verticalGuideline"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/lastOperationsRecycler"
-      android:layout_marginLeft="@dimen/screen_horizontal_margin"
+      android:layout_marginStart="@dimen/screen_horizontal_margin"
+      android:layout_marginEnd="@dimen/screen_horizontal_small_margin"
+      android:layout_marginTop="@dimen/screen_vertical_x_small_margin"
+      android:layout_marginBottom="@dimen/screen_vertical_x_small_margin"
       />
 
-  <androidx.recyclerview.widget.RecyclerView
+  <include layout="@layout/operation_panel"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toTopOf="@id/endGameButton"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="@id/verticalGuideline"
       app:layout_constraintTop_toBottomOf="@id/lastOperationsRecycler"
-      />
+      android:layout_marginEnd="@dimen/screen_horizontal_margin"
+      android:layout_marginStart="@dimen/screen_horizontal_small_margin"
+    />
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/lastOperationsRecycler"

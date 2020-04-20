@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/plusTurnover"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/plus_turnover"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusSteal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_steal"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusBlock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_block"
+        />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusAssist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_assist"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusRebound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_rebound"
+        />
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/missThreePoints"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/miss_three_points"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusThreePoints"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_three_points"
+        />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/missTwoPoints"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/miss_two_points"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusTwoPoints"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_two_points"
+        />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/missOnePoint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/miss_one_point"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plusOnePoint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/plus_one_point"
+        />
+  </LinearLayout>
+
+</LinearLayout>
