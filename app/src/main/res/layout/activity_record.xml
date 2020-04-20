@@ -16,6 +16,7 @@
       android:text="@string/undo"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
+      android:theme="@style/Button.Bad"
       />
 
   <androidx.appcompat.widget.AppCompatButton
@@ -26,6 +27,7 @@
       android:text="@string/end_game"
       app:layout_constraintBottom_toBottomOf="@id/undoButton"
       app:layout_constraintEnd_toEndOf="parent"
+      android:theme="@style/Button.Good"
       />
 
   <androidx.constraintlayout.widget.Guideline

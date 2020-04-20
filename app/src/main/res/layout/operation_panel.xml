@@ -10,6 +10,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/plus_turnover"
+      android:theme="@style/Button.Bad"
       />
 
   <LinearLayout
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_steal"
+        android:theme="@style/Button.Good"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_block"
+        android:theme="@style/Button.Good"
         />
 
   </LinearLayout>
@@ -48,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_assist"
+        android:theme="@style/Button.Good"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -56,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_rebound"
+        android:theme="@style/Button.Good"
         />
   </LinearLayout>
 
@@ -71,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/miss_three_points"
+        android:theme="@style/Button.Bad"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -79,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_three_points"
+        android:theme="@style/Button.Good"
         />
 
   </LinearLayout>
@@ -96,6 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/miss_two_points"
+        android:theme="@style/Button.Bad"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -104,6 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_two_points"
+        android:theme="@style/Button.Good"
         />
 
   </LinearLayout>
@@ -120,6 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/miss_one_point"
+        android:theme="@style/Button.Bad"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -128,6 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/plus_one_point"
+        android:theme="@style/Button.Good"
         />
   </LinearLayout>
 
