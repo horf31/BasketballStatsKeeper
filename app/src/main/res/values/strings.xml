@@ -11,6 +11,7 @@
   <string name="end_game">End game</string>
 
   <string name="missing_player_toast_text">Please select a player first</string>
+  <string name="operation_empty_toast_text">Operation currently empty</string>
 
   <!--  Record Panel -->
   <string name="plus_one_point">+1 PTS</string>

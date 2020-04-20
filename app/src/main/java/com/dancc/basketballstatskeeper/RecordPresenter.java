@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 public class RecordPresenter {
   public interface Interface {
-    void updateOperation();
+    void addOperation(Operation operation);
+    void removeOperation();
     void displayMissingPlayerToast();
+    void displayLastOperationToast();
   }
 
   private Interface page;
@@ -26,14 +28,22 @@ public class RecordPresenter {
   }
 
   void onOperationActionClicked(Action action) {
-    if (currentSelectedPlayer == null) {
+    final Player currentPlayer = currentSelectedPlayer;
+    if (currentPlayer == null) {
       page.displayMissingPlayerToast();
     }
-    operations.add(new Operation(currentSelectedPlayer, action));
+
+    Operation newOperation = new Operation(currentPlayer, action);
+    operations.add(newOperation);
+    page.addOperation(newOperation);
   }
 
   void onUndoButtonClicked() {
-
+    if (operations.isEmpty()) {
+      page.displayLastOperationToast();
+    } else {
+      page.removeOperation();
+    }
   }
 
   void onEndGameButtonClicked() {

@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import com.dancc.basketballstatskeeper.adapter.OperationAdapter;
 import com.dancc.basketballstatskeeper.adapter.PlayerIconAdapter;
 import com.dancc.basketballstatskeeper.model.Action;
+import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
 import com.dancc.basketballstatskeeper.util.MockData;
 
@@ -67,6 +68,8 @@ public class RecordActivity extends AppCompatActivity
 
   private RecordPresenter recordPresenter = new RecordPresenter();
 
+  private OperationAdapter operationAdapter = new OperationAdapter(MockData.getMockOperations());
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -87,7 +90,7 @@ public class RecordActivity extends AppCompatActivity
 
   private void setUpLastOperationsRecycler() {
     lastOperationsRecycler.setLayoutManager(new LinearLayoutManager(this));
-    lastOperationsRecycler.setAdapter(new OperationAdapter(MockData.getMockOperations()));
+    lastOperationsRecycler.setAdapter(operationAdapter);
   }
 
   private void setUpPlayerRecycler() {
@@ -103,13 +106,24 @@ public class RecordActivity extends AppCompatActivity
 
   // Presenter Callback
   @Override
-  public void updateOperation() {
+  public void addOperation(Operation operation) {
+    operationAdapter.addOperation(operation);
+  }
+
+  @Override
+  public void removeOperation() {
 
   }
 
   @Override
   public void displayMissingPlayerToast() {
     Toast.makeText(getApplicationContext(), getText(R.string.missing_player_toast_text),
+        Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void displayLastOperationToast() {
+    Toast.makeText(getApplicationContext(), getText(R.string.operation_empty_toast_text),
         Toast.LENGTH_SHORT).show();
   }
 

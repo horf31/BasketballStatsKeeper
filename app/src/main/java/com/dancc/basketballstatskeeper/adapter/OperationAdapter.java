@@ -21,6 +21,11 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
     this.operations = operations;
   }
 
+  public void addOperation(Operation operation) {
+    operations.add(operation);
+    notifyItemChanged(operations.size() - 1);
+  }
+
   @NonNull
   @Override
   public OperationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
