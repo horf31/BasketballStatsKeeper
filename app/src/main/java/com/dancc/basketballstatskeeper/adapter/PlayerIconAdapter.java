@@ -3,6 +3,7 @@ package com.dancc.basketballstatskeeper.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,10 +16,18 @@ import java.util.List;
 public class PlayerIconAdapter
     extends RecyclerView.Adapter<PlayerIconAdapter.PlayerIconViewHolder> {
 
-  private List<Player> players;
+  public interface PlayerIconAdapterCallback {
+    void onPlayerClicked(Player player);
+  }
 
-  public PlayerIconAdapter(List<Player> players) {
+  private List<Player> players;
+  private PlayerIconAdapterCallback callback;
+
+  private int selectedPosition = RecyclerView.NO_POSITION;
+
+  public PlayerIconAdapter(List<Player> players, PlayerIconAdapterCallback callback) {
     this.players = players;
+    this.callback = callback;
   }
 
   @NonNull
@@ -27,12 +36,23 @@ public class PlayerIconAdapter
     View v = LayoutInflater.from(parent.getContext())
         .inflate(R.layout.player_icon_cell_view, parent, false);
 
-    return new PlayerIconViewHolder(v);
+    final PlayerIconViewHolder viewHolder = new PlayerIconViewHolder(v);
+    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        callback.onPlayerClicked(players.get(viewHolder.getAdapterPosition()));
+        notifyItemChanged(selectedPosition);
+        selectedPosition = viewHolder.getAdapterPosition();
+        notifyItemChanged(selectedPosition);
+      }
+    });
+
+    return viewHolder;
   }
 
   @Override
   public void onBindViewHolder(@NonNull PlayerIconViewHolder holder, int position) {
-    holder.bind(players.get(position));
+    holder.bind(players.get(position), selectedPosition == position);
   }
 
   @Override
@@ -41,6 +61,10 @@ public class PlayerIconAdapter
   }
 
   static class PlayerIconViewHolder extends RecyclerView.ViewHolder {
+
+    @BindView(R.id.playerOutline)
+    ImageView playerOutline;
+
     @BindView(R.id.playerNumber)
     TextView playerNumber;
 
@@ -53,9 +77,17 @@ public class PlayerIconAdapter
       ButterKnife.bind(this, v);
     }
 
-    void bind(Player player) {
-      playerNumber.setText(Integer.toString(player.number));
+    void bind(Player player, Boolean isSelected) {
+      playerNumber.setText(String.format("%d", player.number));
       playerName.setText(player.name);
+
+      if (isSelected) {
+        playerOutline.setColorFilter(
+            itemView.getResources().getColor(R.color.radish));
+      } else {
+        playerOutline.setColorFilter(
+            itemView.getResources().getColor(R.color.black20));
+      }
     }
   }
 }

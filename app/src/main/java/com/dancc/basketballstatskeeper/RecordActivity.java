@@ -8,15 +8,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dancc.basketballstatskeeper.adapter.OperationAdapter;
 import com.dancc.basketballstatskeeper.adapter.PlayerIconAdapter;
+import com.dancc.basketballstatskeeper.model.Player;
 import com.dancc.basketballstatskeeper.util.MockData;
 
-public class RecordActivity extends AppCompatActivity {
+public class RecordActivity extends AppCompatActivity implements
+    RecordPresenter.Interface,
+    PlayerIconAdapter.PlayerIconAdapterCallback {
 
   @BindView(R.id.lastOperationsRecycler)
   RecyclerView lastOperationsRecycler;
 
   @BindView(R.id.playerRecycler)
   RecyclerView playerRecycler;
+
+  private RecordPresenter recordPresenter = new RecordPresenter();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,8 @@ public class RecordActivity extends AppCompatActivity {
     setUpLastOperationsRecycler();
 
     setUpPlayerRecycler();
+
+    recordPresenter.onAttachPage(this);
   }
 
   private void setUpLastOperationsRecycler() {
@@ -37,6 +44,18 @@ public class RecordActivity extends AppCompatActivity {
 
   private void setUpPlayerRecycler() {
     playerRecycler.setLayoutManager(new LinearLayoutManager(this));
-    playerRecycler.setAdapter(new PlayerIconAdapter(MockData.getMockPlayers()));
+    playerRecycler.setAdapter(new PlayerIconAdapter(MockData.getMockPlayers(), this));
+  }
+
+  // Adapter Callback
+  @Override
+  public void onPlayerClicked(Player player) {
+    recordPresenter.onPlayerClicked(player);
+  }
+
+  // Presenter Callback
+  @Override
+  public void updateOperation() {
+
   }
 }
