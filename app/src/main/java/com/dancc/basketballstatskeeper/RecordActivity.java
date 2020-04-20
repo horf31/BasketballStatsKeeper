@@ -108,11 +108,13 @@ public class RecordActivity extends AppCompatActivity
   @Override
   public void addOperation(Operation operation) {
     operationAdapter.addOperation(operation);
+
+    lastOperationsRecycler.smoothScrollToPosition(operationAdapter.getItemCount());
   }
 
   @Override
   public void removeOperation() {
-
+    operationAdapter.removeOperation();
   }
 
   @Override

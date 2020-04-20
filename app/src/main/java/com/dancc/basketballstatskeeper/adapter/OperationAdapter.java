@@ -21,11 +21,6 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
     this.operations = operations;
   }
 
-  public void addOperation(Operation operation) {
-    operations.add(operation);
-    notifyItemChanged(operations.size() - 1);
-  }
-
   @NonNull
   @Override
   public OperationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +28,16 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
         .inflate(R.layout.operation_cell_view, parent, false);
 
     return new OperationViewHolder(v);
+  }
+
+  public void addOperation(Operation operation) {
+    operations.add(operation);
+    notifyItemInserted(operations.size() - 1);
+  }
+
+  public void removeOperation() {
+    operations.remove(operations.size() - 1);
+    notifyItemRemoved(operations.size());
   }
 
   @Override
