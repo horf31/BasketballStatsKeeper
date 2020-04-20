@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <dimen name="screen_horizontal_margin">24dp</dimen>
+  <dimen name="screen_horizontal_small_margin">16dp</dimen>
+  <dimen name="screen_horizontal_x_small_margin">8dp</dimen>
+
   <dimen name="screen_vertical_margin">24dp</dimen>
   <dimen name="screen_vertical_small_margin">16dp</dimen>
   <dimen name="screen_vertical_x_small_margin">8dp</dimen>
@@ -8,6 +11,6 @@
   <dimen name="player_icon_width">80dp</dimen>
   <dimen name="player_icon_height">80dp</dimen>
 
-
-  <dimen name="last_operations_view_height">200dp</dimen>
+  <!-- todo: change this to be portion of screen -->
+  <dimen name="last_operations_view_height">130dp</dimen>
 </resources>
