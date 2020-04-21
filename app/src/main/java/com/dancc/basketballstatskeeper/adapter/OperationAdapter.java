@@ -3,6 +3,7 @@ package com.dancc.basketballstatskeeper.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,10 +16,17 @@ import java.util.List;
 
 public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.OperationViewHolder> {
 
+  public interface OperationAdapterCallback {
+    void onOperationRemoveIconClicked(int position);
+  }
+
   private List<Operation> operations;
 
-  public OperationAdapter(List<Operation> operations) {
+  private OperationAdapterCallback callback;
+
+  public OperationAdapter(List<Operation> operations, OperationAdapterCallback callback) {
     this.operations = operations;
+    this.callback = callback;
   }
 
   @NonNull
@@ -27,7 +35,12 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
     View v = LayoutInflater.from(parent.getContext())
         .inflate(R.layout.operation_cell_view, parent, false);
 
-    return new OperationViewHolder(v);
+    OperationViewHolder viewHolder = new OperationViewHolder(v);
+
+    viewHolder.operationRemove.setOnClickListener(
+        view -> callback.onOperationRemoveIconClicked(viewHolder.getAdapterPosition()));
+
+    return viewHolder;
   }
 
   public void addOperation(Operation operation) {
@@ -35,9 +48,14 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
     notifyItemInserted(operations.size() - 1);
   }
 
-  public void removeOperation() {
+  public void removeLastOperation() {
     operations.remove(operations.size() - 1);
     notifyItemRemoved(operations.size());
+  }
+
+  public void removeOperation(int position) {
+    operations.remove(position);
+    notifyItemRemoved(position);
   }
 
   @Override
@@ -56,6 +74,9 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
 
     @BindView(R.id.operationTextView)
     TextView operationTextView;
+
+    @BindView(R.id.operationRemove)
+    ImageView operationRemove;
 
     OperationViewHolder(View v) {
       super(v);

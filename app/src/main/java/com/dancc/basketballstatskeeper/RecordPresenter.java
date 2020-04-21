@@ -8,8 +8,13 @@ import java.util.ArrayList;
 public class RecordPresenter {
   public interface Interface {
     void addOperation(Operation operation);
-    void removeOperation();
+
+    void removeOperation(int position);
+
+    void removeLastOperation();
+
     void displayMissingPlayerToast();
+
     void displayLastOperationToast();
   }
 
@@ -38,11 +43,15 @@ public class RecordPresenter {
     page.addOperation(newOperation);
   }
 
+  void onRemoveOperationClicked(int position) {
+    page.removeOperation(position);
+  }
+
   void onUndoButtonClicked() {
     if (operations.isEmpty()) {
       page.displayLastOperationToast();
     } else {
-      page.removeOperation();
+      page.removeLastOperation();
     }
   }
 

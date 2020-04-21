@@ -14,9 +14,11 @@ import com.dancc.basketballstatskeeper.model.Action;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
 import com.dancc.basketballstatskeeper.util.MockData;
+import java.util.ArrayList;
 
 public class RecordActivity extends AppCompatActivity
-    implements RecordPresenter.Interface, PlayerIconAdapter.PlayerIconAdapterCallback {
+    implements RecordPresenter.Interface, PlayerIconAdapter.PlayerIconAdapterCallback,
+    OperationAdapter.OperationAdapterCallback {
 
   // Recycler Displays
   @BindView(R.id.lastOperationsRecycler)
@@ -68,7 +70,8 @@ public class RecordActivity extends AppCompatActivity
 
   private RecordPresenter recordPresenter = new RecordPresenter();
 
-  private OperationAdapter operationAdapter = new OperationAdapter(MockData.getMockOperations());
+  private OperationAdapter operationAdapter =
+      new OperationAdapter(new ArrayList<>(), this);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,11 @@ public class RecordActivity extends AppCompatActivity
     recordPresenter.onPlayerClicked(player);
   }
 
+  @Override
+  public void onOperationRemoveIconClicked(int position) {
+    recordPresenter.onRemoveOperationClicked(position);
+  }
+
   // Presenter Callback
   @Override
   public void addOperation(Operation operation) {
@@ -113,8 +121,13 @@ public class RecordActivity extends AppCompatActivity
   }
 
   @Override
-  public void removeOperation() {
-    operationAdapter.removeOperation();
+  public void removeLastOperation() {
+    operationAdapter.removeLastOperation();
+  }
+
+  @Override
+  public void removeOperation(int position) {
+    operationAdapter.removeOperation(position);
   }
 
   @Override
