@@ -2,4 +2,6 @@
 <resources>
   <dimen name="small_button_font_size">14sp</dimen>
   <dimen name="big_button_font_size">20sp</dimen>
+
+  <dimen name="stats_font_size">17sp</dimen>
 </resources>

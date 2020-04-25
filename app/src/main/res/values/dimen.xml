@@ -16,5 +16,7 @@
 
   <dimen name="stat_row_col_width">40dp</dimen>
 
-  <dimen name="stat_row_col_width_large">50dp</dimen>
+  <dimen name="stat_row_col_width_large">55dp</dimen>
+
+  <dimen name="stat_row_vertical_margin">8dp</dimen>
 </resources>
