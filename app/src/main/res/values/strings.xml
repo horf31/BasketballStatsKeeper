@@ -33,6 +33,7 @@
   <string name="ast">AST</string>
   <string name="blk">BLK</string>
   <string name="stl">STL</string>
+  <string name="to">TO</string>
   <string name="three_pt">3 PT</string>
   <string name="two_pt">2 PT</string>
   <string name="ft">FT</string>

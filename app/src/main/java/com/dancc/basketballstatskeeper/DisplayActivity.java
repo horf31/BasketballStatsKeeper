@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.dancc.basketballstatskeeper.adapter.PlayerListAdapter;
 import com.dancc.basketballstatskeeper.adapter.StatsAdapter;
 import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.util.MockData;
@@ -16,6 +17,9 @@ public class DisplayActivity extends AppCompatActivity {
   @BindView(R.id.statsRecycler)
   RecyclerView statsRecycler;
 
+  @BindView(R.id.playerAdapter)
+  RecyclerView playerAdapter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -23,13 +27,20 @@ public class DisplayActivity extends AppCompatActivity {
 
     ButterKnife.bind(this);
 
-    setUpRecycler();
+    setUpNameRecycler();
+    setUpStatsRecycler();
+
   }
 
-  private void setUpRecycler() {
+  private void setUpStatsRecycler() {
     List<GameStats> mockData = MockData.getMockGameStats();
 
     statsRecycler.setLayoutManager(new LinearLayoutManager(this));
     statsRecycler.setAdapter(new StatsAdapter(mockData));
+  }
+
+  private void setUpNameRecycler() {
+    playerAdapter.setLayoutManager(new LinearLayoutManager(this));
+    playerAdapter.setAdapter(new PlayerListAdapter(MockData.getMockPlayerNames()));
   }
 }

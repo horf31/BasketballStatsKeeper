@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,21 +13,31 @@
       android:orientation="horizontal"
       >
 
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:text="Player names"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playerAdapter"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/statsRecycler"
+
+      <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          />
+          android:orientation="vertical">
+
+        <include
+            layout="@layout/stat_row_header_view"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/statsRecycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+      </LinearLayout>
 
     </HorizontalScrollView>
 

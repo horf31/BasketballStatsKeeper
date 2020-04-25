@@ -29,6 +29,26 @@ public class MockData {
         add(new Player(10, "Mike B"));
         add(new Player(4, "Chris W"));
         add(new Player(13, "Steve N"));
+        add(new Player(9, "Russel W"));
+        add(new Player(2, "Devin B"));
+        add(new Player(0, "Giannis A"));
+      }
+    };
+  }
+
+  public static ArrayList<String> getMockPlayerNames() {
+    return new ArrayList<String>() {
+      {
+        add("");
+        add("Kevin G");
+        add("Dwayne W");
+        add("Mike B");
+        add("Chris W");
+        add("Steve N");
+        add("Russel W");
+        add("Devin B");
+        add("Giannis A");
+
       }
     };
   }

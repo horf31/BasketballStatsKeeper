@@ -1,7 +1,6 @@
 package com.dancc.basketballstatskeeper.adapter;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,6 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.StatsViewHol
 
   @Override
   public void onBindViewHolder(@NonNull StatsViewHolder holder, int position) {
-    Log.d("abcabc", "bind");
     holder.bind(gameStats.get(position));
   }
 
