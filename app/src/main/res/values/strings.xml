@@ -25,4 +25,16 @@
   <string name="plus_block">+1 BLK</string>
   <string name="plus_steal">+1 STL</string>
   <string name="plus_turnover">+1 TO</string>
+
+  <!--  Display Page -->
+  <string name="players">PLAYERS</string>
+  <string name="pts">PTS</string>
+  <string name="reb">REB</string>
+  <string name="ast">AST</string>
+  <string name="blk">BLK</string>
+  <string name="stl">STL</string>
+  <string name="three_pt">3 PT</string>
+  <string name="two_pt">2 PT</string>
+  <string name="ft">FT</string>
+
 </resources>

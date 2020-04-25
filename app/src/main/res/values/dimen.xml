@@ -13,4 +13,8 @@
 
   <!-- todo: change this to be portion of screen -->
   <dimen name="last_operations_view_height">130dp</dimen>
+
+  <dimen name="stat_row_col_width">40dp</dimen>
+
+  <dimen name="stat_row_col_width_large">50dp</dimen>
 </resources>

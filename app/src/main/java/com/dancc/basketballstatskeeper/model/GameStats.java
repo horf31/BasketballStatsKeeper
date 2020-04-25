@@ -20,8 +20,20 @@ public class GameStats {
   public Shooting twoPtsShooting;
   public Shooting freeThrowShooting;
 
-  class Shooting {
-    public int attempted;
-    public int made;
+  public GameStats(int gameStatsId, int playerId, int gameId, int points, int rebounds, int assists,
+      int steals, int blocks, int turnovers, Shooting threePtsShooting, Shooting twoPtsShooting,
+      Shooting freeThrowShooting) {
+    this.gameStatsId = gameStatsId;
+    this.playerId = playerId;
+    this.gameId = gameId;
+    this.points = points;
+    this.rebounds = rebounds;
+    this.assists = assists;
+    this.steals = steals;
+    this.blocks = blocks;
+    this.turnovers = turnovers;
+    this.threePtsShooting = threePtsShooting;
+    this.twoPtsShooting = twoPtsShooting;
+    this.freeThrowShooting = freeThrowShooting;
   }
 }
