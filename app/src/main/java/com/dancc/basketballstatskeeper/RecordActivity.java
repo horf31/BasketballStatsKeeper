@@ -10,11 +10,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dancc.basketballstatskeeper.adapter.OperationAdapter;
 import com.dancc.basketballstatskeeper.adapter.PlayerIconAdapter;
+import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Action;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
 import com.dancc.basketballstatskeeper.util.MockData;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecordActivity extends AppCompatActivity
     implements RecordPresenter.Interface, PlayerIconAdapter.PlayerIconAdapterCallback,
@@ -68,7 +70,7 @@ public class RecordActivity extends AppCompatActivity
   @BindView(R.id.endGameButton)
   AppCompatButton endGameButton;
 
-  private RecordPresenter recordPresenter = new RecordPresenter();
+  private RecordPresenter recordPresenter;
 
   private OperationAdapter operationAdapter =
       new OperationAdapter(new ArrayList<>(), this);
@@ -82,23 +84,30 @@ public class RecordActivity extends AppCompatActivity
 
     setUpLastOperationsRecycler();
 
-    setUpPlayerRecycler();
-
     setUpOperationPanel();
 
     setUpBottomButtons();
 
+    CustomApplication application = (CustomApplication) getApplicationContext();
+
+    recordPresenter = new RecordPresenter(
+        GameDatabase.getInstance(this),
+        application.ioScheduler,
+        application.uiScheduler
+    );
+
     recordPresenter.onAttachPage(this);
+  }
+
+  @Override
+  protected void onDestroy() {
+    recordPresenter.onDetachPage();
+    super.onDestroy();
   }
 
   private void setUpLastOperationsRecycler() {
     lastOperationsRecycler.setLayoutManager(new LinearLayoutManager(this));
     lastOperationsRecycler.setAdapter(operationAdapter);
-  }
-
-  private void setUpPlayerRecycler() {
-    playerRecycler.setLayoutManager(new LinearLayoutManager(this));
-    playerRecycler.setAdapter(new PlayerIconAdapter(MockData.getMockPlayers(), this));
   }
 
   // Adapter Callback
@@ -113,6 +122,13 @@ public class RecordActivity extends AppCompatActivity
   }
 
   // Presenter Callback
+
+  @Override
+  public void displayPlayers(List<Player> players) {
+    playerRecycler.setLayoutManager(new LinearLayoutManager(this));
+    playerRecycler.setAdapter(new PlayerIconAdapter(MockData.getMockPlayers(), this));
+  }
+
   @Override
   public void addOperation(Operation operation) {
     operationAdapter.addOperation(operation);

@@ -1,5 +1,6 @@
 package com.dancc.basketballstatskeeper.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,7 @@ public class PlayerIconAdapter
       ButterKnife.bind(this, v);
     }
 
+    @SuppressLint("DefaultLocale")
     void bind(Player player, Boolean isSelected) {
       playerNumber.setText(String.format("%d", player.number));
       playerName.setText(player.name);
