@@ -4,12 +4,13 @@ import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Action;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
+import com.dancc.basketballstatskeeper.util.MockData;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordPresenter {
+class RecordPresenter {
   public interface Interface {
     void addOperation(Operation operation);
 
@@ -49,6 +50,7 @@ public class RecordPresenter {
   void onAttachPage(Interface page) {
     this.page = page;
     loadPlayers();
+    //insertFakePlayers();
   }
 
   private void loadPlayers() {
@@ -68,6 +70,22 @@ public class RecordPresenter {
     //    )
     //);
   }
+
+  private void insertFakePlayers() {
+    disposables.add(db.playerDao().insertAll(MockData.getMockPlayers())
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe()
+    );
+  }
+
+  //private void deletePlayer() {
+  //  disposables.add(db.playerDao().delete()
+  //      .subscribeOn(ioScheduler)
+  //      .observeOn(uiScheduler)
+  //      .subscribe()
+  //  );
+  //}
 
   void onPlayerClicked(Player player) {
     currentSelectedPlayer = player;

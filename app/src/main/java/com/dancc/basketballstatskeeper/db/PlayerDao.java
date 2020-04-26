@@ -1,6 +1,7 @@
 package com.dancc.basketballstatskeeper.db;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import com.dancc.basketballstatskeeper.model.Player;
@@ -14,17 +15,18 @@ public interface PlayerDao {
   Maybe<List<Player>> getAll();
 
   @Query("SELECT * FROM Player WHERE id LIKE :id LIMIT 1")
-  Player findById(int id);
+  Maybe<Player> findById(int id);
 
   @Insert
   Completable insert(Player player);
 
   @Insert
-  void insertAll(List<Player> players);
+  Completable insertAll(List<Player> players);
+
+  @Delete
+  Completable delete(Player player);
 
   //    @Update
-  //    fun update(id: Int)
-  //
-  //    @Delete
-  //    fun delete(id: Int)
+  //  //    fun update(id: Int)
+  //  //
 }

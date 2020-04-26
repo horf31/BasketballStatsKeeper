@@ -126,7 +126,7 @@ public class RecordActivity extends AppCompatActivity
   @Override
   public void displayPlayers(List<Player> players) {
     playerRecycler.setLayoutManager(new LinearLayoutManager(this));
-    playerRecycler.setAdapter(new PlayerIconAdapter(MockData.getMockPlayers(), this));
+    playerRecycler.setAdapter(new PlayerIconAdapter(players, this));
   }
 
   @Override
