@@ -38,7 +38,8 @@ public class DisplayActivity extends AppCompatActivity implements DisplayPresent
     displayPresenter = new DisplayPresenter(
         GameDatabase.getInstance(this),
         application.ioScheduler,
-        application.uiScheduler
+        application.uiScheduler,
+        0
     );
 
     displayPresenter.onAttachPage(this);

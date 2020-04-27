@@ -8,7 +8,7 @@ import com.dancc.basketballstatskeeper.model.Game;
 import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.model.Player;
 
-@Database(entities = { Player.class, GameStats.class, Game.class }, version = 3)
+@Database(entities = { Player.class, GameStats.class, Game.class }, version = 4)
 public abstract class GameDatabase extends RoomDatabase {
 
   private static final String DB_NAME = "game-database";

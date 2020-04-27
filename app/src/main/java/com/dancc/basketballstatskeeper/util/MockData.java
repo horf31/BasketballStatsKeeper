@@ -1,6 +1,7 @@
 package com.dancc.basketballstatskeeper.util;
 
 import com.dancc.basketballstatskeeper.model.Action;
+import com.dancc.basketballstatskeeper.model.Game;
 import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
@@ -65,5 +66,9 @@ public class MockData {
         add(new GameStats(0, 0, 0, 5, 2, 3, 1, 0, 0));
       }
     };
+  }
+
+  public static Game getMockGame() {
+    return new Game(getMockPlayers(), getMockGameStats());
   }
 }

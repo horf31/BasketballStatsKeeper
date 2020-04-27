@@ -4,7 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import com.dancc.basketballstatskeeper.model.Game;
-import com.dancc.basketballstatskeeper.model.GameStats;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import java.util.List;
@@ -17,10 +16,13 @@ public interface GameDao {
   @Query("SELECT * FROM Game WHERE gameId LIKE :id LIMIT 1")
   Maybe<Game> findById(int id);
 
+  @Query("SELECT * FROM Game LIMIT 1")
+  Maybe<Game> getOne();
+
   @Insert
-  Completable insertAll(List<GameStats> gameStats);
+  Completable insert(Game game);
 
   // Be CAREFUL calling it!!!
   @Query("DELETE FROM Game")
-  void nukeTable();
+  Completable nukeTable();
 }
