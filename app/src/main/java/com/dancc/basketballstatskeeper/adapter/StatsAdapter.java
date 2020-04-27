@@ -83,12 +83,12 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.StatsViewHol
       stl.setText(String.format("%d", gameStats.steals));
       to.setText(String.format("%d", gameStats.turnovers));
 
-      twoPT.setText(String.format("%d - %d", gameStats.twoPtsShooting.made,
-          gameStats.twoPtsShooting.attempted));
-      threePT.setText(String.format("%d - %d", gameStats.threePtsShooting.made,
-          gameStats.threePtsShooting.attempted));
-      onePT.setText(String.format("%d - %d", gameStats.freeThrowShooting.made,
-          gameStats.freeThrowShooting.attempted));
+      twoPT.setText(String.format("%d - %d", gameStats.twoPtsMade,
+          gameStats.twoPtsAttempted));
+      threePT.setText(String.format("%d - %d", gameStats.threePtsMade,
+          gameStats.threePtsAttempted));
+      onePT.setText(String.format("%d - %d", gameStats.freeThrowMade,
+          gameStats.freeThrowAttempted));
     }
   }
 }

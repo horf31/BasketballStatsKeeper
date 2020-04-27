@@ -1,13 +1,16 @@
 package com.dancc.basketballstatskeeper;
 
+import android.util.Log;
 import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Action;
+import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
 import com.dancc.basketballstatskeeper.util.MockData;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 class RecordPresenter {
@@ -23,6 +26,8 @@ class RecordPresenter {
     void displayLastOperationToast();
 
     void displayPlayers(List<Player> players);
+
+    //void goToDisplayActivity();
   }
 
   private GameDatabase db;
@@ -37,11 +42,12 @@ class RecordPresenter {
 
   private CompositeDisposable disposables = new CompositeDisposable();
 
-  RecordPresenter(
-      GameDatabase db,
-      Scheduler ioScheduler,
-      Scheduler uiScheduler
-  ) {
+  private List<Player> players;
+
+  // Key is player id
+  private HashMap<Integer, GameStats> gameStatsHashMap = new HashMap<>();
+
+  RecordPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler) {
     this.db = db;
     this.ioScheduler = ioScheduler;
     this.uiScheduler = uiScheduler;
@@ -54,13 +60,15 @@ class RecordPresenter {
   }
 
   private void loadPlayers() {
-    disposables.add(db.playerDao().getAll()
+    disposables.add(db.playerDao()
+        .getAll()
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
-        .subscribe(players ->
-            page.displayPlayers(players)
-        )
-    );
+        .subscribe(players -> {
+          this.players = players;
+          initializePlayerStats();
+          page.displayPlayers(players);
+        }));
 
     //disposables.add(db.playerDao().insert(new Player(3, "Dan"))
     //    .subscribeOn(ioScheduler)
@@ -72,11 +80,19 @@ class RecordPresenter {
   }
 
   private void insertFakePlayers() {
-    disposables.add(db.playerDao().insertAll(MockData.getMockPlayers())
+    disposables.add(db.playerDao()
+        .insertAll(MockData.getMockPlayers())
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
-        .subscribe()
-    );
+        .subscribe());
+  }
+
+  private void initializePlayerStats() {
+    for (Player player: players) {
+      GameStats stats = new GameStats(player.id);
+
+      gameStatsHashMap.put(player.id, stats);
+    }
   }
 
   //private void deletePlayer() {
@@ -99,6 +115,7 @@ class RecordPresenter {
 
     Operation newOperation = new Operation(currentPlayer, action);
     operations.add(newOperation);
+
     page.addOperation(newOperation);
   }
 
@@ -115,7 +132,14 @@ class RecordPresenter {
   }
 
   void onEndGameButtonClicked() {
+    for (Operation op : operations) {
+      GameStats stats = gameStatsHashMap.get(op.player.id);
+      if (stats != null) {
+        stats.changeStats(op.action);
+      }
+    }
 
+    Log.d("abcabc", "");
   }
 
   void onDetachPage() {

@@ -1,24 +1,27 @@
 package com.dancc.basketballstatskeeper;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dancc.basketballstatskeeper.adapter.PlayerListAdapter;
 import com.dancc.basketballstatskeeper.adapter.StatsAdapter;
+import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.util.MockData;
 import java.util.List;
 
-public class DisplayActivity extends AppCompatActivity {
+public class DisplayActivity extends AppCompatActivity implements DisplayPresenter.Interface{
 
   @BindView(R.id.statsRecycler)
   RecyclerView statsRecycler;
 
   @BindView(R.id.playerAdapter)
   RecyclerView playerAdapter;
+
+  private DisplayPresenter displayPresenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +31,36 @@ public class DisplayActivity extends AppCompatActivity {
     ButterKnife.bind(this);
 
     setUpNameRecycler();
-    setUpStatsRecycler();
 
-  }
+    // Set up presenter
+    CustomApplication application = (CustomApplication) getApplicationContext();
 
-  private void setUpStatsRecycler() {
-    List<GameStats> mockData = MockData.getMockGameStats();
+    displayPresenter = new DisplayPresenter(
+        GameDatabase.getInstance(this),
+        application.ioScheduler,
+        application.uiScheduler
+    );
 
-    statsRecycler.setLayoutManager(new LinearLayoutManager(this));
-    statsRecycler.setAdapter(new StatsAdapter(mockData));
+    displayPresenter.onAttachPage(this);
+
   }
 
   private void setUpNameRecycler() {
     playerAdapter.setLayoutManager(new LinearLayoutManager(this));
     playerAdapter.setAdapter(new PlayerListAdapter(MockData.getMockPlayerNames()));
+  }
+
+  // Presenter callbacks
+
+  @Override
+  public void displayGameStats(List<GameStats> gameStats) {
+    statsRecycler.setLayoutManager(new LinearLayoutManager(this));
+    statsRecycler.setAdapter(new StatsAdapter(gameStats));
+  }
+
+  @Override
+  protected void onDestroy() {
+    displayPresenter.onDetachPage();
+    super.onDestroy();
   }
 }

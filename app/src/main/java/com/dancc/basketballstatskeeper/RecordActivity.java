@@ -88,6 +88,7 @@ public class RecordActivity extends AppCompatActivity
 
     setUpBottomButtons();
 
+    // Set up presenter
     CustomApplication application = (CustomApplication) getApplicationContext();
 
     recordPresenter = new RecordPresenter(

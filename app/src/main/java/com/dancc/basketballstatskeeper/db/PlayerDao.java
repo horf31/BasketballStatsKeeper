@@ -29,4 +29,8 @@ public interface PlayerDao {
   //    @Update
   //  //    fun update(id: Int)
   //  //
+
+  // Be CAREFUL calling it!!!
+  @Query("DELETE FROM Player")
+  void nukeTable();
 }
