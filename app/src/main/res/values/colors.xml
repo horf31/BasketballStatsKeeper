@@ -6,6 +6,7 @@
 
   <color name="radish">#EE5C5C</color>
   <color name="blue">#0F72E5</color>
+  <color name="white">@android:color/white</color>
 
   <color name="black10">#EEEEEE</color>
   <color name="black20">#CCCCCC</color>

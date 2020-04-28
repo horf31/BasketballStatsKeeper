@@ -4,4 +4,6 @@
   <dimen name="big_button_font_size">20sp</dimen>
 
   <dimen name="stats_font_size">17sp</dimen>
+
+  <dimen name="title_font_size">40sp</dimen>
 </resources>

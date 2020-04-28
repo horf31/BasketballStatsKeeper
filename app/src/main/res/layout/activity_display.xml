@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DisplayActivity"
     >
-
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,5 +44,32 @@
 
   </LinearLayout>
 
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/toolbar_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:elevation="8dp">
 
-</FrameLayout>
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/blue"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        >
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="400dp"
+          android:text="@string/game_stats"
+          android:textColor="@color/white"
+          android:textSize="@dimen/title_font_size"
+          android:gravity="center"
+        />
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
