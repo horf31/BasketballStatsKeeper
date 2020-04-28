@@ -30,8 +30,6 @@ public class DisplayActivity extends AppCompatActivity implements DisplayPresent
 
     ButterKnife.bind(this);
 
-    setUpNameRecycler();
-
     // Set up presenter
     CustomApplication application = (CustomApplication) getApplicationContext();
 
@@ -46,17 +44,18 @@ public class DisplayActivity extends AppCompatActivity implements DisplayPresent
 
   }
 
-  private void setUpNameRecycler() {
-    playerAdapter.setLayoutManager(new LinearLayoutManager(this));
-    playerAdapter.setAdapter(new PlayerListAdapter(MockData.getMockPlayerNames()));
-  }
-
   // Presenter callbacks
 
   @Override
   public void displayGameStats(List<GameStats> gameStats) {
     statsRecycler.setLayoutManager(new LinearLayoutManager(this));
     statsRecycler.setAdapter(new StatsAdapter(gameStats));
+  }
+
+  @Override
+  public void displayNames(List<String> names) {
+    playerAdapter.setLayoutManager(new LinearLayoutManager(this));
+    playerAdapter.setAdapter(new PlayerListAdapter(names));
   }
 
   @Override

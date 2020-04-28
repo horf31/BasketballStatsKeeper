@@ -1,5 +1,6 @@
 package com.dancc.basketballstatskeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -157,6 +158,12 @@ public class RecordActivity extends AppCompatActivity
   public void displayLastOperationToast() {
     Toast.makeText(getApplicationContext(), getText(R.string.operation_empty_toast_text),
         Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void goToDisplayActivity() {
+    Intent intent = new Intent(this, DisplayActivity.class);
+    startActivity(intent);
   }
 
   private void setUpOperationPanel() {

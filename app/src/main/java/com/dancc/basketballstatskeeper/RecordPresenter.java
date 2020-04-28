@@ -1,6 +1,5 @@
 package com.dancc.basketballstatskeeper;
 
-import android.util.Log;
 import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Action;
 import com.dancc.basketballstatskeeper.model.GameStats;
@@ -27,7 +26,7 @@ class RecordPresenter {
 
     void displayPlayers(List<Player> players);
 
-    //void goToDisplayActivity();
+    void goToDisplayActivity();
   }
 
   private GameDatabase db;
@@ -139,7 +138,7 @@ class RecordPresenter {
       }
     }
 
-    Log.d("abcabc", "");
+    page.goToDisplayActivity();
   }
 
   void onDetachPage() {

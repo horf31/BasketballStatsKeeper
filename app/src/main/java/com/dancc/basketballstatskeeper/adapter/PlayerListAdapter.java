@@ -31,19 +31,20 @@ public class PlayerListAdapter
 
   @Override
   public void onBindViewHolder(@NonNull PlayerNameViewHolder holder, int position) {
-    holder.bind(players.get(position));
+    if (position != 0) {
+      holder.bind(players.get(position - 1));
+    }
   }
 
   @Override
   public int getItemCount() {
-    return players.size();
+    return players.size() + 1;
   }
 
   static class PlayerNameViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.playerName)
     TextView playerName;
-
 
     PlayerNameViewHolder(View v) {
       super(v);

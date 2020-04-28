@@ -2,13 +2,16 @@ package com.dancc.basketballstatskeeper;
 
 import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.GameStats;
+import com.dancc.basketballstatskeeper.model.Player;
 import com.dancc.basketballstatskeeper.util.MockData;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayPresenter {
   public interface Interface {
+    void displayNames(List<String> names);
     void displayGameStats(List<GameStats> gameStats);
   }
 
@@ -55,9 +58,14 @@ public class DisplayPresenter {
         .getOne()
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
-        .subscribe(game ->
-            page.displayGameStats(game.gameStatsList)
-            //Log.d("abcabc", "abc")
+        .subscribe(game -> {
+              ArrayList<String> names = new ArrayList<>();
+              for (Player player: game.players) {
+                names.add(player.name);
+              }
+              page.displayNames(names);
+              page.displayGameStats(game.gameStatsList);
+            }
         ));
   }
 
