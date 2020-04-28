@@ -56,16 +56,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/blue"
+        android:fitsSystemWindows="true"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:title="@string/game_stats"
+        app:contentScrim="@android:color/transparent"
         >
 
       <TextView
           android:layout_width="match_parent"
-          android:layout_height="400dp"
+          android:layout_height="300dp"
           android:text="@string/game_stats"
           android:textColor="@color/white"
           android:textSize="@dimen/title_font_size"
           android:gravity="center"
+          app:layout_collapseMode="parallax"
+          app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
         />
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
