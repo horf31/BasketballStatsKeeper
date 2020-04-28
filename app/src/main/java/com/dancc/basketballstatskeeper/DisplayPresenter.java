@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayPresenter {
+class DisplayPresenter {
   public interface Interface {
     void displayNames(List<String> names);
     void displayGameStats(List<GameStats> gameStats);
@@ -35,25 +35,30 @@ public class DisplayPresenter {
     this.page = page;
 
     loadGameStatsFromGameId();
-    //insertFakeGame();
-    //clearGame();
-
-    //insertFakeGameStats();
-
-
-  }
-
-  private void loadGameStats() {
-    disposables.add(db.gameStatsDao()
-        .getAll()
-        .subscribeOn(ioScheduler)
-        .observeOn(uiScheduler)
-        .subscribe(gameStats -> {
-          page.displayGameStats(gameStats);
-        }));
   }
 
   private void loadGameStatsFromGameId() {
+    disposables.add(db.gameDao()
+        .findById(gameId)
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe(game -> {
+              ArrayList<String> names = new ArrayList<>();
+              for (Player player: game.players) {
+                names.add(player.name);
+              }
+              page.displayNames(names);
+              page.displayGameStats(game.gameStatsList);
+            }
+        ));
+  }
+
+  void onDetachPage() {
+    disposables.clear();
+  }
+
+  // DEBUG
+  private void loadAnyGameStats() {
     disposables.add(db.gameDao()
         .getOne()
         .subscribeOn(ioScheduler)
@@ -67,6 +72,16 @@ public class DisplayPresenter {
               page.displayGameStats(game.gameStatsList);
             }
         ));
+  }
+
+  private void loadGameStats() {
+    disposables.add(db.gameStatsDao()
+        .getAll()
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe(gameStats -> {
+          page.displayGameStats(gameStats);
+        }));
   }
 
   private void insertFakeGameStats() {
@@ -91,9 +106,5 @@ public class DisplayPresenter {
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
         .subscribe());
-  }
-
-  void onDetachPage() {
-    disposables.clear();
   }
 }

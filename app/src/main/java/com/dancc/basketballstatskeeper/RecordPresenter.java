@@ -2,6 +2,7 @@ package com.dancc.basketballstatskeeper;
 
 import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Action;
+import com.dancc.basketballstatskeeper.model.Game;
 import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
@@ -26,12 +27,13 @@ class RecordPresenter {
 
     void displayPlayers(List<Player> players);
 
-    void goToDisplayActivity();
+    void goToDisplayActivity(int gameId);
   }
 
   private GameDatabase db;
   private Scheduler ioScheduler;
   private Scheduler uiScheduler;
+  private boolean debugMode;
 
   private Interface page;
 
@@ -46,10 +48,11 @@ class RecordPresenter {
   // Key is player id
   private HashMap<Integer, GameStats> gameStatsHashMap = new HashMap<>();
 
-  RecordPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler) {
+  RecordPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler, boolean debugMode) {
     this.db = db;
     this.ioScheduler = ioScheduler;
     this.uiScheduler = uiScheduler;
+    this.debugMode = debugMode;
   }
 
   void onAttachPage(Interface page) {
@@ -68,14 +71,6 @@ class RecordPresenter {
           initializePlayerStats();
           page.displayPlayers(players);
         }));
-
-    //disposables.add(db.playerDao().insert(new Player(3, "Dan"))
-    //    .subscribeOn(ioScheduler)
-    //    .observeOn(uiScheduler)
-    //    .subscribe(
-    //
-    //    )
-    //);
   }
 
   private void insertFakePlayers() {
@@ -93,14 +88,6 @@ class RecordPresenter {
       gameStatsHashMap.put(player.id, stats);
     }
   }
-
-  //private void deletePlayer() {
-  //  disposables.add(db.playerDao().delete()
-  //      .subscribeOn(ioScheduler)
-  //      .observeOn(uiScheduler)
-  //      .subscribe()
-  //  );
-  //}
 
   void onPlayerClicked(Player player) {
     currentSelectedPlayer = player;
@@ -131,6 +118,10 @@ class RecordPresenter {
   }
 
   void onEndGameButtonClicked() {
+    if (debugMode) {
+      return;
+    }
+
     for (Operation op : operations) {
       GameStats stats = gameStatsHashMap.get(op.player.id);
       if (stats != null) {
@@ -138,10 +129,47 @@ class RecordPresenter {
       }
     }
 
-    page.goToDisplayActivity();
+    ArrayList<GameStats> gameStatsArrayList = new ArrayList<>();
+    for (Player player: players) {
+      gameStatsArrayList.add(gameStatsHashMap.get(player.id));
+    }
+
+    Game game = new Game(players, gameStatsArrayList);
+
+    disposables.add(
+        db.gameDao().insert(game)
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe( gameId -> page.goToDisplayActivity(gameId.intValue()) )
+    );
   }
 
   void onDetachPage() {
     disposables.clear();
+  }
+
+  // DEBUG
+  private void insertFakeGame() {
+    disposables.add(db.gameDao()
+        .insert(MockData.getMockGame())
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe());
+  }
+
+  private void clearGame() {
+    disposables.add(db.gameDao()
+        .nukeTable()
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe());
+  }
+
+  private void deletePlayer(Player player) {
+    disposables.add(db.playerDao().delete(player)
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe()
+    );
   }
 }

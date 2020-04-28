@@ -6,6 +6,7 @@ import androidx.room.Query;
 import com.dancc.basketballstatskeeper.model.Game;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.Single;
 import java.util.List;
 
 @Dao
@@ -20,7 +21,7 @@ public interface GameDao {
   Maybe<Game> getOne();
 
   @Insert
-  Completable insert(Game game);
+  Single<Long> insert(Game game);
 
   // Be CAREFUL calling it!!!
   @Query("DELETE FROM Game")

@@ -95,7 +95,8 @@ public class RecordActivity extends AppCompatActivity
     recordPresenter = new RecordPresenter(
         GameDatabase.getInstance(this),
         application.ioScheduler,
-        application.uiScheduler
+        application.uiScheduler,
+        application.debugMode
     );
 
     recordPresenter.onAttachPage(this);
@@ -161,8 +162,9 @@ public class RecordActivity extends AppCompatActivity
   }
 
   @Override
-  public void goToDisplayActivity() {
+  public void goToDisplayActivity(int gameId) {
     Intent intent = new Intent(this, DisplayActivity.class);
+    intent.putExtra(DisplayActivity.GAME_ID, gameId);
     startActivity(intent);
   }
 

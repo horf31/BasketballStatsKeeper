@@ -1,5 +1,6 @@
 package com.dancc.basketballstatskeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,12 +24,18 @@ public class DisplayActivity extends AppCompatActivity implements DisplayPresent
 
   private DisplayPresenter displayPresenter;
 
+  public static final String GAME_ID = "game_id";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display);
 
     ButterKnife.bind(this);
+
+    // Get the Intent that started this activity and extract the string
+    Intent intent = getIntent();
+    int gameId = intent.getIntExtra(GAME_ID, -1);
 
     // Set up presenter
     CustomApplication application = (CustomApplication) getApplicationContext();
@@ -37,7 +44,7 @@ public class DisplayActivity extends AppCompatActivity implements DisplayPresent
         GameDatabase.getInstance(this),
         application.ioScheduler,
         application.uiScheduler,
-        0
+        gameId
     );
 
     displayPresenter.onAttachPage(this);
