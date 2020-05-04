@@ -1,6 +1,7 @@
 package com.dancc.basketballstatskeeper.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 import com.dancc.basketballstatskeeper.db.converter.GameStatsListConverter;
@@ -19,6 +20,13 @@ public class Game {
   public List<GameStats> gameStatsList;
 
   public Game(List<Player> players, List<GameStats> gameStatsList) {
+    this.players = players;
+    this.gameStatsList = gameStatsList;
+  }
+
+  @Ignore
+  public Game(int id, List<Player> players, List<GameStats> gameStatsList) {
+    this.gameId = id;
     this.players = players;
     this.gameStatsList = gameStatsList;
   }

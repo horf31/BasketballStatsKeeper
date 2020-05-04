@@ -69,6 +69,16 @@ public class MockData {
   }
 
   public static Game getMockGame() {
-    return new Game(getMockPlayers(), getMockGameStats());
+    return new Game(1, getMockPlayers(), getMockGameStats());
+  }
+
+  public static ArrayList<Game> getMockGames() {
+    return new ArrayList<Game>() {
+      {
+        add(getMockGame());
+        add(getMockGame());
+        add(getMockGame());
+      }
+    };
   }
 }
