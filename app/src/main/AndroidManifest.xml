@@ -10,8 +10,8 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
-    <activity android:name=".DisplayActivity"/>
-    <!-- todo: change this back after testing -->
+    <activity android:name=".DisplayActivity" />
+
     <activity android:name=".RecordActivity" />
     <activity android:name=".MainActivity">
       <intent-filter>
@@ -20,6 +20,19 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <receiver android:name=".widget.GameAppWidget">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+
+      <meta-data
+          android:name="android.appwidget.provider"
+          android:resource="@xml/game_app_widget_info" />
+    </receiver>
+
+    <service
+        android:name=".widget.GameIntentService"
+        android:exported="false" />
   </application>
 
 </manifest>

@@ -14,6 +14,9 @@ public interface GameDao {
   @Query("SELECT * FROM Game")
   Maybe<List<Game>> getAll();
 
+  @Query("SELECT * FROM Game")
+  List<Game> getAllBlocking();
+
   @Query("SELECT * FROM Game WHERE gameId LIKE :id LIMIT 1")
   Maybe<Game> findById(int id);
 

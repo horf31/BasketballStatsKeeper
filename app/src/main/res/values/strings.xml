@@ -44,5 +44,7 @@
   <string name="ft">FT</string>
 
   <string name="game_stats">GAME STATS</string>
+  <string name="appwidget_text">EXAMPLE</string>
+  <string name="add_widget">Add widget</string>
 
 </resources>
