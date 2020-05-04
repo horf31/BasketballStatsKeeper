@@ -9,6 +9,8 @@
   <string name="enter_number">Enter number</string>
   <string name="enter_name">Enter name</string>
 
+  <string name="player_added">Player added</string>
+
   <!--  Record Page -->
   <string name="undo">Undo</string>
   <string name="end_game">End game</string>

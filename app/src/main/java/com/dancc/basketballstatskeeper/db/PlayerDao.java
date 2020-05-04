@@ -7,6 +7,7 @@ import androidx.room.Query;
 import com.dancc.basketballstatskeeper.model.Player;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.Single;
 import java.util.List;
 
 @Dao
@@ -18,7 +19,7 @@ public interface PlayerDao {
   Maybe<Player> findById(int id);
 
   @Insert
-  Completable insert(Player player);
+  Single<Long> insert(Player player);
 
   @Insert
   Completable insertAll(List<Player> players);

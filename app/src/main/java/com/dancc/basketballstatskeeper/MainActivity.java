@@ -2,6 +2,7 @@ package com.dancc.basketballstatskeeper;
 
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatButton;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dancc.basketballstatskeeper.adapter.GameAdapter;
+import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Game;
 import java.util.List;
 
@@ -41,7 +43,14 @@ public class MainActivity extends AppCompatActivity
 
     ButterKnife.bind(this);
 
-    mainPresenter = new MainPresenter();
+    // Set up presenter
+    CustomApplication application = (CustomApplication) getApplicationContext();
+
+    mainPresenter = new MainPresenter(
+        GameDatabase.getInstance(this),
+        application.ioScheduler,
+        application.uiScheduler
+    );
     mainPresenter.onAttachPage(this);
 
     addPlayerButton.setOnClickListener(view -> {
@@ -65,6 +74,14 @@ public class MainActivity extends AppCompatActivity
 
     pastGamesRecycler.setLayoutManager(new LinearLayoutManager(this));
     pastGamesRecycler.setAdapter(gameAdapter);
+  }
+
+  @Override
+  public void showPlayerAdded() {
+    numberEditText.setText("");
+    nameEditText.setText("");
+    Toast.makeText(getApplicationContext(), getText(R.string.player_added),
+        Toast.LENGTH_SHORT).show();
   }
 
   @Override

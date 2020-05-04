@@ -11,6 +11,8 @@ import java.util.List;
 class MainPresenter {
   public interface Interface {
     void displayGames(List<Game> games);
+
+    void showPlayerAdded();
   }
 
   private GameDatabase db;
@@ -20,6 +22,8 @@ class MainPresenter {
   private Interface page;
 
   private CompositeDisposable disposables = new CompositeDisposable();
+
+  private boolean addingPlayer = false;
 
   MainPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler) {
     this.db = db;
@@ -34,10 +38,17 @@ class MainPresenter {
   }
 
   void onAddPlayerButtonClicked(int number, String name) {
-    disposables.add(db.playerDao().insert(new Player(number, name))
+    if (addingPlayer) return;
+
+    addingPlayer = true;
+    disposables.add(db.playerDao()
+        .insert(new Player(number, name))
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
-        .subscribe());
+        .subscribe(playerId -> {
+          addingPlayer = false;
+          page.showPlayerAdded();
+        }));
   }
 
   void onDetachPage() {
