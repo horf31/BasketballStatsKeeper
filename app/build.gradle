@@ -61,4 +61,7 @@ dependencies {
 
   // Admob
   implementation 'com.google.android.gms:play-services-ads:11.8.0'
+
+  // Analytics
+  implementation 'com.google.firebase:firebase-analytics:17.4.0'
 }

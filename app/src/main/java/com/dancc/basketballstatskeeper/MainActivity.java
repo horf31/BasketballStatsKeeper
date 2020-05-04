@@ -15,6 +15,7 @@ import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Game;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity
 
   private GameAdapter gameAdapter;
 
+  private FirebaseAnalytics firebaseAnalytics;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,13 +51,17 @@ public class MainActivity extends AppCompatActivity
 
     ButterKnife.bind(this);
 
+    // Obtain the FirebaseAnalytics instance.
+    firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
     // Set up presenter
     CustomApplication application = (CustomApplication) getApplicationContext();
 
     mainPresenter = new MainPresenter(
         GameDatabase.getInstance(this),
         application.ioScheduler,
-        application.uiScheduler
+        application.uiScheduler,
+        firebaseAnalytics
     );
     mainPresenter.onAttachPage(this);
 
