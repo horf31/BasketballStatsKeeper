@@ -4,5 +4,6 @@
     android:id="@+id/gameTextView"
     android:layout_width="40dp"
     android:layout_height="wrap_content"
+    android:textSize="@dimen/stats_font_size"
     tools:text="5"
     />

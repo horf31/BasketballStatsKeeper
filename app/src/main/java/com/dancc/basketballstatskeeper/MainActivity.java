@@ -73,4 +73,10 @@ public class MainActivity extends AppCompatActivity
     intent.putExtra(DisplayActivity.GAME_ID, game.gameId);
     startActivity(intent);
   }
+
+  @Override
+  protected void onDestroy() {
+    mainPresenter.onDetachPage();
+    super.onDestroy();
+  }
 }
