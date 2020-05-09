@@ -28,7 +28,8 @@ class MainPresenter {
 
   private boolean addingPlayer = false;
 
-  MainPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler, FirebaseAnalytics firebaseAnalytics) {
+  MainPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler,
+      FirebaseAnalytics firebaseAnalytics) {
     this.db = db;
     this.ioScheduler = ioScheduler;
     this.uiScheduler = uiScheduler;
@@ -38,9 +39,19 @@ class MainPresenter {
   void onAttachPage(Interface page) {
     this.page = page;
 
-    page.displayGames(MockData.getMockGames());
+    loadGames();
+
+    //addMockedGames();
 
     logEvent();
+  }
+
+  private void loadGames() {
+    disposables.add(db.gameDao()
+        .getAll()
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe(games -> page.displayGames(games)));
   }
 
   private void logEvent() {
@@ -69,5 +80,19 @@ class MainPresenter {
 
   void onDetachPage() {
     disposables.clear();
+  }
+
+  // DEBUG
+  private void deleteAllGames() {
+    disposables.add(
+        db.gameDao().nukeTable().subscribeOn(ioScheduler).observeOn(uiScheduler).subscribe());
+  }
+
+  private void addMockedGames() {
+    disposables.add(db.gameDao()
+        .insertAll(MockData.getMockGames())
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe());
   }
 }

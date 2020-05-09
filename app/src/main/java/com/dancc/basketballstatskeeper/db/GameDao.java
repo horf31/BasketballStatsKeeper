@@ -26,6 +26,9 @@ public interface GameDao {
   @Insert
   Single<Long> insert(Game game);
 
+  @Insert
+  Completable insertAll(List<Game> games);
+
   // Be CAREFUL calling it!!!
   @Query("DELETE FROM Game")
   Completable nukeTable();

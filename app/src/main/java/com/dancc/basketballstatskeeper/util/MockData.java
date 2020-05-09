@@ -69,7 +69,7 @@ public class MockData {
   }
 
   public static Game getMockGame() {
-    return new Game(1, getMockPlayers(), getMockGameStats());
+    return new Game(getMockPlayers(), getMockGameStats());
   }
 
   public static ArrayList<Game> getMockGames() {
