@@ -15,6 +15,9 @@ import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Game;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.List;
 
@@ -54,15 +57,18 @@ public class MainActivity extends AppCompatActivity
     // Obtain the FirebaseAnalytics instance.
     firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
+    // Set up ads
+    MobileAds.initialize(this, new OnInitializationCompleteListener() {
+      @Override
+      public void onInitializationComplete(InitializationStatus initializationStatus) {
+      }
+    });
+
     // Set up presenter
     CustomApplication application = (CustomApplication) getApplicationContext();
 
-    mainPresenter = new MainPresenter(
-        GameDatabase.getInstance(this),
-        application.ioScheduler,
-        application.uiScheduler,
-        firebaseAnalytics
-    );
+    mainPresenter = new MainPresenter(GameDatabase.getInstance(this), application.ioScheduler,
+        application.uiScheduler, firebaseAnalytics);
     mainPresenter.onAttachPage(this);
 
     addPlayerButton.setOnClickListener(view -> {
@@ -85,11 +91,7 @@ public class MainActivity extends AppCompatActivity
   private void setUpAdView() {
     if (adView != null) {
       // Create an ad request. Check logcat output for the hashed device ID to
-      // get test ads on a physical device. e.g.
-      // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-      AdRequest adRequest = new AdRequest.Builder()
-          .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-          .build();
+      AdRequest adRequest = new AdRequest.Builder().build();
       adView.loadAd(adRequest);
     }
   }
@@ -106,8 +108,8 @@ public class MainActivity extends AppCompatActivity
   public void showPlayerAdded() {
     numberEditText.setText("");
     nameEditText.setText("");
-    Toast.makeText(getApplicationContext(), getText(R.string.player_added),
-        Toast.LENGTH_SHORT).show();
+    Toast.makeText(getApplicationContext(), getText(R.string.player_added), Toast.LENGTH_SHORT)
+        .show();
   }
 
   @Override
