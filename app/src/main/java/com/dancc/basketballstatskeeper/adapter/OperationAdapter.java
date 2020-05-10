@@ -65,7 +65,7 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
 
   @Override
   public int getItemCount() {
-    return operations.size();
+    return operations == null ? 0 : operations.size();
   }
 
   static class OperationViewHolder extends RecyclerView.ViewHolder {

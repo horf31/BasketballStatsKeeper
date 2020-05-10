@@ -30,8 +30,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
   @NonNull
   @Override
   public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View v = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.game_cell_view, parent, false);
+    View v =
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.game_cell_view, parent, false);
 
     GameViewHolder viewHolder = new GameViewHolder(v);
 
@@ -48,7 +48,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
 
   @Override
   public int getItemCount() {
-    return games.size();
+    return games == null ? 0 : games.size();
   }
 
   static class GameViewHolder extends RecyclerView.ViewHolder {

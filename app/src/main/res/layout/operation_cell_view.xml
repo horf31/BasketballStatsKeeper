@@ -29,5 +29,6 @@
       android:layout_height="wrap_content"
       android:padding="4dp"
       android:src="@drawable/ic_cancel"
-      android:tint="@color/radish"/>
+      android:tint="@color/radish"
+      android:contentDescription="@string/remove_this_operation"/>
 </LinearLayout>

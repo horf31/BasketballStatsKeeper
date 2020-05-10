@@ -85,8 +85,6 @@ public class RecordActivity extends AppCompatActivity
 
     setUpLastOperationsRecycler();
 
-    setUpOperationPanel();
-
     setUpBottomButtons();
 
     // Set up presenter
@@ -167,7 +165,8 @@ public class RecordActivity extends AppCompatActivity
     startActivity(intent);
   }
 
-  private void setUpOperationPanel() {
+  @Override
+  public void setUpOperationPanel() {
     plusOnePoint.setOnClickListener(
         view -> recordPresenter.onOperationActionClicked(Action.POINT1));
 

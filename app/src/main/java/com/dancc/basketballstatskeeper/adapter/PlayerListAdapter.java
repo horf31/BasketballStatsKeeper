@@ -38,7 +38,7 @@ public class PlayerListAdapter
 
   @Override
   public int getItemCount() {
-    return players.size() + 1;
+    return players == null ? 0 : players.size() + 1;
   }
 
   static class PlayerNameViewHolder extends RecyclerView.ViewHolder {

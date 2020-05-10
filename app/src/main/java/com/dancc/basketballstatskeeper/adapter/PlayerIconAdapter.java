@@ -55,7 +55,7 @@ public class PlayerIconAdapter
 
   @Override
   public int getItemCount() {
-    return players.size();
+    return players == null ? 0 : players.size();
   }
 
   static class PlayerIconViewHolder extends RecyclerView.ViewHolder {
@@ -81,11 +81,9 @@ public class PlayerIconAdapter
       playerName.setText(player.name);
 
       if (isSelected) {
-        playerOutline.setColorFilter(
-            itemView.getResources().getColor(R.color.radish));
+        playerOutline.setColorFilter(itemView.getResources().getColor(R.color.radish));
       } else {
-        playerOutline.setColorFilter(
-            itemView.getResources().getColor(R.color.black20));
+        playerOutline.setColorFilter(itemView.getResources().getColor(R.color.black20));
       }
     }
   }

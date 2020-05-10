@@ -37,7 +37,7 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.StatsViewHol
 
   @Override
   public int getItemCount() {
-    return gameStats.size();
+    return gameStats == null ? 0 : gameStats.size();
   }
 
   static class StatsViewHolder extends RecyclerView.ViewHolder {
@@ -83,12 +83,11 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.StatsViewHol
       stl.setText(String.format("%d", gameStats.steals));
       to.setText(String.format("%d", gameStats.turnovers));
 
-      twoPT.setText(String.format("%d - %d", gameStats.twoPtsMade,
-          gameStats.twoPtsAttempted));
-      threePT.setText(String.format("%d - %d", gameStats.threePtsMade,
-          gameStats.threePtsAttempted));
-      onePT.setText(String.format("%d - %d", gameStats.freeThrowMade,
-          gameStats.freeThrowAttempted));
+      twoPT.setText(String.format("%d - %d", gameStats.twoPtsMade, gameStats.twoPtsAttempted));
+      threePT.setText(
+          String.format("%d - %d", gameStats.threePtsMade, gameStats.threePtsAttempted));
+      onePT.setText(
+          String.format("%d - %d", gameStats.freeThrowMade, gameStats.freeThrowAttempted));
     }
   }
 }

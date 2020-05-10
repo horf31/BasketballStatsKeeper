@@ -31,6 +31,9 @@
   <string name="plus_steal">+1 STL</string>
   <string name="plus_turnover">+1 TO</string>
 
+  <string name="remove_this_operation">Remove this operation</string>
+  <string name="player_outline">Player outline</string>
+
   <!--  Display Page -->
   <string name="players">PLAYERS</string>
   <string name="pts">PTS</string>

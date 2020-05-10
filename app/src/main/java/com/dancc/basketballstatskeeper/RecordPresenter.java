@@ -27,6 +27,8 @@ class RecordPresenter {
     void displayPlayers(List<Player> players);
 
     void goToDisplayActivity(int gameId);
+
+    void setUpOperationPanel();
   }
 
   private GameDatabase db;
@@ -78,6 +80,9 @@ class RecordPresenter {
   }
 
   void onPlayerClicked(Player player) {
+    if (currentSelectedPlayer == null) {
+      page.setUpOperationPanel();
+    }
     currentSelectedPlayer = player;
   }
 
