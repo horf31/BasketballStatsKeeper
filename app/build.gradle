@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+  signingConfigs {
+    debug {
+      storeFile file('../upload-keystore')
+      storePassword 'udacity'
+      keyAlias = 'key0'
+      keyPassword 'udacity'
+    }
+  }
   compileSdkVersion 29
   buildToolsVersion "29.0.2"
 
@@ -15,7 +23,11 @@ android {
   }
 
   buildTypes {
+    debug {
+      applicationIdSuffix '.debug'
+    }
     release {
+      signingConfig signingConfigs.debug
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
