@@ -82,17 +82,29 @@ class MainPresenter {
     disposables.clear();
   }
 
-  // DEBUG
-  private void deleteAllGames() {
-    disposables.add(
-        db.gameDao().nukeTable().subscribeOn(ioScheduler).observeOn(uiScheduler).subscribe());
-  }
-
-  private void addMockedGames() {
+  void onAddMockedGamesClicked() {
     disposables.add(db.gameDao()
         .insertAll(MockData.getMockGames())
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
         .subscribe());
+  }
+
+  void onClearAllGamesClicked() {
+    disposables.add(
+        db.gameDao().nukeTable().subscribeOn(ioScheduler).observeOn(uiScheduler).subscribe());
+  }
+
+  void onAddMockedPlayersClicked() {
+    disposables.add(db.playerDao()
+        .insertAll(MockData.getMockPlayers())
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe());
+  }
+
+  void onClearAllPlayersClicked() {
+    disposables.add(
+        db.playerDao().nukeTable().subscribeOn(ioScheduler).observeOn(uiScheduler).subscribe());
   }
 }

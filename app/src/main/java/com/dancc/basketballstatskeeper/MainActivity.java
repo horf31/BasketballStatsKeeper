@@ -1,6 +1,7 @@
 package com.dancc.basketballstatskeeper;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,18 @@ public class MainActivity extends AppCompatActivity
 
   @BindView(R.id.adView)
   AdView adView;
+
+  @BindView(R.id.clearFakeGames)
+  AppCompatButton clearFakeGamesButton;
+
+  @BindView(R.id.clearPlayers)
+  AppCompatButton clearPlayersButton;
+
+  @BindView(R.id.addFakeGames)
+  AppCompatButton addFakeGamesButton;
+
+  @BindView(R.id.addFakePlayers)
+  AppCompatButton addFakePlayersButton;
 
   private MainPresenter mainPresenter;
 
@@ -86,6 +99,8 @@ public class MainActivity extends AppCompatActivity
     });
 
     setUpAdView();
+
+    showPlayModeButtons();
   }
 
   private void setUpAdView() {
@@ -94,6 +109,20 @@ public class MainActivity extends AppCompatActivity
       AdRequest adRequest = new AdRequest.Builder().build();
       adView.loadAd(adRequest);
     }
+  }
+
+  private void showPlayModeButtons() {
+    clearFakeGamesButton.setOnClickListener(view -> mainPresenter.onClearAllGamesClicked());
+    clearFakeGamesButton.setVisibility(View.VISIBLE);
+
+    clearPlayersButton.setOnClickListener(view -> mainPresenter.onClearAllPlayersClicked());
+    clearPlayersButton.setVisibility(View.VISIBLE);
+
+    addFakeGamesButton.setOnClickListener(view -> mainPresenter.onAddMockedGamesClicked());
+    addFakeGamesButton.setVisibility(View.VISIBLE);
+
+    addFakePlayersButton.setOnClickListener(view -> mainPresenter.onAddMockedPlayersClicked());
+    addFakePlayersButton.setVisibility(View.VISIBLE);
   }
 
   @Override

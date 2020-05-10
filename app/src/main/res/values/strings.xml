@@ -51,4 +51,10 @@
   <string name="admob_app_id">ca-app-pub-3936942669570939~3998566240</string>
   <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
+
+  <!--  Debug  -->
+  <string name="add_fake_games">Add fake games</string>
+  <string name="add_fake_players">Add fake players</string>
+  <string name="clear_all_games">Clear all games</string>
+  <string name="clear_all_players">Clear all players</string>
 </resources>

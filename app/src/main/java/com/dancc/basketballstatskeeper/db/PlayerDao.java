@@ -27,11 +27,7 @@ public interface PlayerDao {
   @Delete
   Completable delete(Player player);
 
-  //    @Update
-  //  //    fun update(id: Int)
-  //  //
-
   // Be CAREFUL calling it!!!
   @Query("DELETE FROM Player")
-  void nukeTable();
+  Completable nukeTable();
 }
