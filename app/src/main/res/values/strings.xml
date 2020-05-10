@@ -54,6 +54,12 @@
   <string name="admob_app_id">ca-app-pub-3936942669570939~3998566240</string>
   <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
+  <!--  Notification  -->
+  <string name="channel_name">Basketball Stats Keeper Channel</string>
+  <string name="channel_description">Track the stats</string>
+  <string name="notif_title">Keep tracking</string>
+  <string name="notif_text">Start your next game!</string>
+
 
   <!--  Debug  -->
   <string name="add_fake_games">Add fake games</string>
