@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -14,6 +15,7 @@ import butterknife.ButterKnife;
 import com.dancc.basketballstatskeeper.adapter.GameAdapter;
 import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Game;
+import com.dancc.basketballstatskeeper.repository.GameViewModel;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity
 
   private FirebaseAnalytics firebaseAnalytics;
 
+  private GameViewModel gameViewModel;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -77,9 +81,21 @@ public class MainActivity extends AppCompatActivity
       }
     });
 
-    // Set up presenter
+    setUpAdView();
+
     CustomApplication application = (CustomApplication) getApplicationContext();
 
+    // Set up view model
+    gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
+    gameViewModel.getGames().observe(this, games -> gameAdapter.setGames(games));
+
+    // Set up recycler
+    gameAdapter = new GameAdapter(this);
+
+    pastGamesRecycler.setLayoutManager(new LinearLayoutManager(this));
+    pastGamesRecycler.setAdapter(gameAdapter);
+
+    // Set up presenter
     mainPresenter = new MainPresenter(GameDatabase.getInstance(this), application.ioScheduler,
         application.uiScheduler, firebaseAnalytics);
     mainPresenter.onAttachPage(this);
@@ -97,8 +113,6 @@ public class MainActivity extends AppCompatActivity
       Intent intent = new Intent(this, RecordActivity.class);
       startActivity(intent);
     });
-
-    setUpAdView();
 
     if (application.debugMode) {
       showPlayModeButtons();
@@ -129,10 +143,7 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void displayGames(List<Game> games) {
-    gameAdapter = new GameAdapter(games, this);
-
-    pastGamesRecycler.setLayoutManager(new LinearLayoutManager(this));
-    pastGamesRecycler.setAdapter(gameAdapter);
+    gameAdapter.setGames(games);
   }
 
   @Override

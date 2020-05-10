@@ -1,5 +1,6 @@
 package com.dancc.basketballstatskeeper.db;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,8 +12,13 @@ import java.util.List;
 
 @Dao
 public interface GameDao {
+  // RxJava way
   @Query("SELECT * FROM Game")
-  Maybe<List<Game>> getAll();
+  Maybe<List<Game>> getGames();
+
+  // LiveData way
+  @Query("SELECT * FROM Game")
+  LiveData<List<Game>> getAll();
 
   @Query("SELECT * FROM Game")
   List<Game> getAllBlocking();

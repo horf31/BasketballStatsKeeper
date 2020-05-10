@@ -1,6 +1,7 @@
 package com.dancc.basketballstatskeeper;
 
 import android.os.Bundle;
+import androidx.lifecycle.LiveData;
 import com.dancc.basketballstatskeeper.db.GameDatabase;
 import com.dancc.basketballstatskeeper.model.Game;
 import com.dancc.basketballstatskeeper.model.Player;
@@ -28,6 +29,8 @@ class MainPresenter {
 
   private boolean addingPlayer = false;
 
+  private LiveData<List<Game>> games;
+
   MainPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler,
       FirebaseAnalytics firebaseAnalytics) {
     this.db = db;
@@ -39,14 +42,14 @@ class MainPresenter {
   void onAttachPage(Interface page) {
     this.page = page;
 
-    loadGames();
+    //loadGames();
 
     logEvent();
   }
 
   private void loadGames() {
     disposables.add(db.gameDao()
-        .getAll()
+        .getGames()
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
         .subscribe(games -> page.displayGames(games)));

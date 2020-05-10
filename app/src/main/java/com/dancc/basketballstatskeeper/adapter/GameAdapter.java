@@ -22,9 +22,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
 
   private GameAdapterCallback callback;
 
-  public GameAdapter(List<Game> games, GameAdapterCallback callback) {
-    this.games = games;
+  public GameAdapter(GameAdapterCallback callback) {
     this.callback = callback;
+  }
+
+  public void setGames(List<Game> games) {
+    this.games = games;
+    notifyDataSetChanged();
   }
 
   @NonNull
