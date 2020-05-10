@@ -41,8 +41,6 @@ class MainPresenter {
 
     loadGames();
 
-    //addMockedGames();
-
     logEvent();
   }
 
@@ -87,12 +85,15 @@ class MainPresenter {
         .insertAll(MockData.getMockGames())
         .subscribeOn(ioScheduler)
         .observeOn(uiScheduler)
-        .subscribe());
+        .subscribe(this::loadGames));
   }
 
   void onClearAllGamesClicked() {
-    disposables.add(
-        db.gameDao().nukeTable().subscribeOn(ioScheduler).observeOn(uiScheduler).subscribe());
+    disposables.add(db.gameDao()
+        .nukeTable()
+        .subscribeOn(ioScheduler)
+        .observeOn(uiScheduler)
+        .subscribe(this::loadGames));
   }
 
   void onAddMockedPlayersClicked() {
