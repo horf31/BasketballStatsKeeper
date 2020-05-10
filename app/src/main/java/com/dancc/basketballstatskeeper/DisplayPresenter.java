@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
 import java.util.List;
 
+// not used because switching to using ViewModel
 class DisplayPresenter {
   public interface Interface {
     void displayNames(List<String> names);
@@ -33,7 +34,7 @@ class DisplayPresenter {
   void onAttachPage(Interface page) {
     this.page = page;
 
-    loadGameStatsFromGameId();
+    //loadGameStatsFromGameId();
   }
 
   private void loadGameStatsFromGameId() {

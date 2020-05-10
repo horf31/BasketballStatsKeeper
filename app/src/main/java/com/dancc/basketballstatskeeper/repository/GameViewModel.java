@@ -22,6 +22,10 @@ public class GameViewModel extends AndroidViewModel {
     return games;
   }
 
+  public LiveData<Game> getGameById(int id) {
+    return gameRepository.getGameById(id);
+  }
+
   public void insert(Game game) {
     gameRepository.insert(game);
   }

@@ -12,13 +12,16 @@ import java.util.List;
 
 @Dao
 public interface GameDao {
-  // RxJava way
-  @Query("SELECT * FROM Game")
-  Maybe<List<Game>> getGames();
-
   // LiveData way
   @Query("SELECT * FROM Game")
   LiveData<List<Game>> getAll();
+
+  @Query("SELECT * FROM Game WHERE gameId LIKE :id LIMIT 1")
+  LiveData<Game> findByIdLive(int id);
+
+  // RxJava way
+  @Query("SELECT * FROM Game")
+  Maybe<List<Game>> getGames();
 
   @Query("SELECT * FROM Game")
   List<Game> getAllBlocking();

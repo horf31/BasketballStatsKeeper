@@ -17,8 +17,12 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.StatsViewHol
 
   private List<GameStats> gameStats;
 
-  public StatsAdapter(List<GameStats> gameStats) {
+  public StatsAdapter() {
+  }
+
+  public void setGameStats(List<GameStats> gameStats) {
     this.gameStats = gameStats;
+    notifyDataSetChanged();
   }
 
   @NonNull

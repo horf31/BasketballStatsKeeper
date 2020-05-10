@@ -22,6 +22,10 @@ public class GameRepository {
     return games;
   }
 
+  LiveData<Game> getGameById(int id) {
+    return gameDao.findByIdLive(id);
+  }
+
   public void insert (Game game) {
     new insertAsyncTask(gameDao).execute(game);
   }

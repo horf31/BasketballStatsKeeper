@@ -16,7 +16,10 @@ public class PlayerListAdapter
 
   private List<String> players;
 
-  public PlayerListAdapter(List<String> players) {
+  public PlayerListAdapter() {
+  }
+
+  public void setPlayers(List<String> players) {
     this.players = players;
   }
 
