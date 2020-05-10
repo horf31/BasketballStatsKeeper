@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class CustomApplication extends Application {
-  boolean debugMode = false;
+  boolean debugMode = true;
   Scheduler ioScheduler = Schedulers.io();
   Scheduler uiScheduler = AndroidSchedulers.mainThread();
 }
