@@ -95,8 +95,7 @@ public class RecordActivity extends AppCompatActivity
     recordPresenter = new RecordPresenter(
         GameDatabase.getInstance(this),
         application.ioScheduler,
-        application.uiScheduler,
-        application.debugMode
+        application.uiScheduler
     );
 
     recordPresenter.onAttachPage(this);

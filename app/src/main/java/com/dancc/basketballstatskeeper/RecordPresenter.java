@@ -6,7 +6,6 @@ import com.dancc.basketballstatskeeper.model.Game;
 import com.dancc.basketballstatskeeper.model.GameStats;
 import com.dancc.basketballstatskeeper.model.Operation;
 import com.dancc.basketballstatskeeper.model.Player;
-import com.dancc.basketballstatskeeper.util.MockData;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ class RecordPresenter {
   private GameDatabase db;
   private Scheduler ioScheduler;
   private Scheduler uiScheduler;
-  private boolean debugMode;
 
   private Interface page;
 
@@ -48,17 +46,15 @@ class RecordPresenter {
   // Key is player id
   private HashMap<Integer, GameStats> gameStatsHashMap = new HashMap<>();
 
-  RecordPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler, boolean debugMode) {
+  RecordPresenter(GameDatabase db, Scheduler ioScheduler, Scheduler uiScheduler) {
     this.db = db;
     this.ioScheduler = ioScheduler;
     this.uiScheduler = uiScheduler;
-    this.debugMode = debugMode;
   }
 
   void onAttachPage(Interface page) {
     this.page = page;
     loadPlayers();
-    //insertFakePlayers();
   }
 
   private void loadPlayers() {
@@ -71,14 +67,6 @@ class RecordPresenter {
           initializePlayerStats();
           page.displayPlayers(players);
         }));
-  }
-
-  private void insertFakePlayers() {
-    disposables.add(db.playerDao()
-        .insertAll(MockData.getMockPlayers())
-        .subscribeOn(ioScheduler)
-        .observeOn(uiScheduler)
-        .subscribe());
   }
 
   private void initializePlayerStats() {
@@ -118,10 +106,6 @@ class RecordPresenter {
   }
 
   void onEndGameButtonClicked() {
-    if (debugMode) {
-      return;
-    }
-
     for (Operation op : operations) {
       GameStats stats = gameStatsHashMap.get(op.player.id);
       if (stats != null) {
@@ -146,30 +130,5 @@ class RecordPresenter {
 
   void onDetachPage() {
     disposables.clear();
-  }
-
-  // DEBUG
-  private void insertFakeGame() {
-    disposables.add(db.gameDao()
-        .insert(MockData.getMockGame())
-        .subscribeOn(ioScheduler)
-        .observeOn(uiScheduler)
-        .subscribe());
-  }
-
-  private void clearGame() {
-    disposables.add(db.gameDao()
-        .nukeTable()
-        .subscribeOn(ioScheduler)
-        .observeOn(uiScheduler)
-        .subscribe());
-  }
-
-  private void deletePlayer(Player player) {
-    disposables.add(db.playerDao().delete(player)
-        .subscribeOn(ioScheduler)
-        .observeOn(uiScheduler)
-        .subscribe()
-    );
   }
 }

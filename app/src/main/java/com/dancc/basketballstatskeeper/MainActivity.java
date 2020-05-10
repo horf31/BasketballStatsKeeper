@@ -100,7 +100,9 @@ public class MainActivity extends AppCompatActivity
 
     setUpAdView();
 
-    showPlayModeButtons();
+    if (application.debugMode) {
+      showPlayModeButtons();
+    }
   }
 
   private void setUpAdView() {
