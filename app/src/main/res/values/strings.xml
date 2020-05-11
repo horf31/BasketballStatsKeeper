@@ -11,6 +11,8 @@
 
   <string name="player_added">Player added</string>
 
+  <string name="player_enter_fail">Please enter a name</string>
+
   <!--  Record Page -->
   <string name="undo">Undo</string>
   <string name="end_game">End game</string>

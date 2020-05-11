@@ -16,6 +16,8 @@ class MainPresenter {
     void displayGames(List<Game> games);
 
     void showPlayerAdded();
+
+    void showEnterAName();
   }
 
   private GameDatabase db;
@@ -62,6 +64,11 @@ class MainPresenter {
 
   void onAddPlayerButtonClicked(int number, String name) {
     if (addingPlayer) return;
+
+    if (name == null || name.isEmpty()) {
+      page.showEnterAName();
+      return;
+    }
 
     Bundle bundle = new Bundle();
     bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Add Player");

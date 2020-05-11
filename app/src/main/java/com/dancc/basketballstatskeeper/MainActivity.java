@@ -102,7 +102,12 @@ public class MainActivity extends AppCompatActivity
 
     addPlayerButton.setOnClickListener(view -> {
       String numberText = numberEditText.getText().toString();
-      int number = Integer.parseInt(numberText);
+      int number;
+      try {
+        number = Integer.parseInt(numberText);
+      } catch (NumberFormatException e) {
+        number = 0;
+      }
 
       String name = nameEditText.getText().toString();
 
@@ -151,6 +156,12 @@ public class MainActivity extends AppCompatActivity
     numberEditText.setText("");
     nameEditText.setText("");
     Toast.makeText(getApplicationContext(), getText(R.string.player_added), Toast.LENGTH_SHORT)
+        .show();
+  }
+
+  @Override
+  public void showEnterAName() {
+    Toast.makeText(getApplicationContext(), getText(R.string.player_enter_fail), Toast.LENGTH_SHORT)
         .show();
   }
 
