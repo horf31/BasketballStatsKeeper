@@ -94,49 +94,49 @@
       />
 
   <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/addFakePlayers"
+      android:id="@+id/addFakePlayersButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/screen_vertical_margin"
       android:layout_marginEnd="@dimen/screen_horizontal_margin"
       android:text="@string/add_fake_players"
       android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@id/clearPlayers"
+      app:layout_constraintBottom_toTopOf="@id/clearPlayersButton"
       app:layout_constraintEnd_toEndOf="@id/adView"
       app:layout_constraintStart_toStartOf="@id/adView"
       tools:visibility="visible"
       />
 
   <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/clearPlayers"
+      android:id="@+id/clearPlayersButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/screen_vertical_margin"
       android:layout_marginEnd="@dimen/screen_horizontal_margin"
       android:text="@string/clear_all_players"
       android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@id/addFakeGames"
+      app:layout_constraintBottom_toTopOf="@id/addFakeGamesButton"
       app:layout_constraintEnd_toEndOf="@id/adView"
       app:layout_constraintStart_toStartOf="@id/adView"
       tools:visibility="visible"
       />
 
   <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/addFakeGames"
+      android:id="@+id/addFakeGamesButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/screen_vertical_margin"
       android:layout_marginEnd="@dimen/screen_horizontal_margin"
       android:text="@string/add_fake_games"
       android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@id/clearFakeGames"
+      app:layout_constraintBottom_toTopOf="@id/clearFakeGamesButton"
       app:layout_constraintEnd_toEndOf="@id/adView"
       app:layout_constraintStart_toStartOf="@id/adView"
       tools:visibility="visible"
       />
 
   <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/clearFakeGames"
+      android:id="@+id/clearFakeGamesButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/screen_vertical_margin"

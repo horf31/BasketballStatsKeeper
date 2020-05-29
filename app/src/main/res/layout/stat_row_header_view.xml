@@ -59,7 +59,7 @@
       />
 
   <TextView
-      android:id="@+id/to"
+      android:id="@+id/turnOver"
       android:layout_width="@dimen/stat_row_col_width"
       android:layout_height="wrap_content"
       android:gravity="center_horizontal"
